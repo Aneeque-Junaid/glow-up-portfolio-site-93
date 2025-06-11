@@ -96,12 +96,12 @@ export default {
 						transform: 'translateY(0)'
 					}
 				},
-				'marquee': {
+				'infinite-scroll': {
 					'0%': {
 						transform: 'translateX(0)'
 					},
 					'100%': {
-						transform: 'translateX(-50%)'
+						transform: 'translateX(calc(-50% - 1rem))'
 					}
 				}
 			},
@@ -109,7 +109,7 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.8s ease-out',
-				'marquee': 'marquee 30s linear infinite'
+				'infinite-scroll': 'infinite-scroll 30s linear infinite'
 			}
 		}
 	},

@@ -18,9 +18,6 @@ const TechStack = () => {
     { name: "CSS", icon: "💙", color: "from-blue-400 to-blue-600" },
   ];
 
-  // Duplicate the array for seamless infinite scroll
-  const duplicatedTech = [...technologies, ...technologies];
-
   return (
     <section ref={sectionRef} id="skills" className="py-20 relative">
       <div className="container mx-auto px-4">
@@ -38,10 +35,26 @@ const TechStack = () => {
         <div className={`relative overflow-hidden transition-all duration-1000 delay-300 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <div className="flex animate-marquee space-x-8">
-            {duplicatedTech.map((tech, index) => (
+          <div className="flex animate-infinite-scroll space-x-8">
+            {/* First set */}
+            {technologies.map((tech, index) => (
               <div
-                key={`${tech.name}-${index}`}
+                key={`first-${tech.name}-${index}`}
+                className="flex-shrink-0 flex flex-col items-center p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-700/50 hover:bg-slate-800/50 transition-all duration-300 min-w-[140px] hover:scale-110 hover:shadow-xl group"
+              >
+                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                  {tech.icon}
+                </div>
+                <span className="text-sm font-medium text-center text-slate-300 group-hover:text-white transition-colors duration-300">
+                  {tech.name}
+                </span>
+                <div className={`w-full h-1 bg-gradient-to-r ${tech.color} rounded-full mt-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300`}></div>
+              </div>
+            ))}
+            {/* Second set for seamless loop */}
+            {technologies.map((tech, index) => (
+              <div
+                key={`second-${tech.name}-${index}`}
                 className="flex-shrink-0 flex flex-col items-center p-6 bg-slate-800/30 backdrop-blur-sm rounded-xl border border-slate-700/50 hover:bg-slate-800/50 transition-all duration-300 min-w-[140px] hover:scale-110 hover:shadow-xl group"
               >
                 <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
