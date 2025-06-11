@@ -1,49 +1,86 @@
 
-import { Card, CardContent } from "@/components/ui/card";
+import { useEffect, useRef, useState } from "react";
 
 const About = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="about" className="py-20 bg-secondary/5">
+    <section 
+      ref={sectionRef}
+      id="about" 
+      className={`py-20 transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">About Me</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            I'm a passionate full-stack developer with expertise in modern web technologies
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="w-full h-80 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center">
-              <div className="text-6xl">👨‍💻</div>
-            </div>
+        <div className="max-w-4xl mx-auto">
+          <div className={`text-center mb-16 transition-all duration-1000 delay-200 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+              About Me
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-primary to-purple-400 mx-auto rounded-full mb-8"></div>
           </div>
-          
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold">Hello! I'm John Doe</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              I'm a software engineer with over 5 years of experience building web applications. 
-              I specialize in React, Node.js, and modern JavaScript frameworks. I love turning 
-              complex problems into simple, beautiful designs.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              When I'm not coding, you can find me exploring new technologies, contributing to 
-              open source projects, or sharing my knowledge through technical writing and mentoring.
-            </p>
-            
-            <div className="grid grid-cols-2 gap-4 pt-6">
-              <Card>
-                <CardContent className="p-6 text-center">
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className={`transition-all duration-1000 delay-400 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}>
+              <div className="relative">
+                <div className="w-80 h-80 mx-auto bg-gradient-to-br from-primary/20 to-purple-400/20 rounded-2xl flex items-center justify-center backdrop-blur-sm border border-primary/10">
+                  <div className="text-8xl">👨‍💻</div>
+                </div>
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full opacity-20 blur-xl"></div>
+                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full opacity-20 blur-xl"></div>
+              </div>
+            </div>
+
+            <div className={`space-y-6 transition-all duration-1000 delay-600 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}>
+              <h3 className="text-2xl font-semibold text-foreground">
+                Full Stack Developer & Problem Solver
+              </h3>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                I'm a passionate full-stack developer with over 5 years of experience 
+                building scalable web applications. I love turning complex problems 
+                into simple, beautiful, and intuitive solutions.
+              </p>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                When I'm not coding, you'll find me exploring new technologies, 
+                contributing to open-source projects, or sharing knowledge with the 
+                developer community.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6 pt-6">
+                <div className="text-center p-4 bg-card/30 backdrop-blur-sm rounded-lg border border-border/20">
                   <div className="text-3xl font-bold text-primary mb-2">50+</div>
-                  <div className="text-sm text-muted-foreground">Projects Completed</div>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="p-6 text-center">
+                  <div className="text-muted-foreground">Projects Completed</div>
+                </div>
+                <div className="text-center p-4 bg-card/30 backdrop-blur-sm rounded-lg border border-border/20">
                   <div className="text-3xl font-bold text-primary mb-2">5+</div>
-                  <div className="text-sm text-muted-foreground">Years Experience</div>
-                </CardContent>
-              </Card>
+                  <div className="text-muted-foreground">Years Experience</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
