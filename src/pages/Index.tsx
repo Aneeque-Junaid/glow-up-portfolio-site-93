@@ -1,4 +1,3 @@
-
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import TechStack from "@/components/TechStack";
@@ -7,10 +6,17 @@ import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ScrollProgress from "@/components/ScrollProgress";
+import FloatingParticles from "@/components/FloatingParticles";
+import FloatingGeometry from "@/components/FloatingGeometry";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-foreground relative overflow-x-hidden">
+      <ScrollProgress />
+      <FloatingParticles />
+      <FloatingGeometry />
+      
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-indigo-500/20 to-purple-600/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
