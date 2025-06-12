@@ -62,7 +62,7 @@ const Projects = () => {
               }}
             >
               <CardHeader className="flex-shrink-0">
-                <div className="w-full h-48 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:from-indigo-500/30 group-hover:to-purple-500/30 transition-all duration-300 border border-slate-700/30">
+                <div className="w-full h-48 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:from-indigo-500/30 group-hover:to-blue-500/30 transition-all duration-300 border border-slate-700/30">
                   <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
                     {project.image}
                   </div>
@@ -89,14 +89,14 @@ const Projects = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-700/50 hover:border-slate-500 hover:text-white transition-all duration-300 hover:scale-105"
+                    className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-700/50 hover:border-slate-500 hover:text-white bg-slate-800/30 backdrop-blur-sm transition-all duration-300 hover:scale-105"
                   >
                     <Github className="w-4 h-4 mr-2" />
                     GitHub
                   </Button>
                   <Button 
                     size="sm" 
-                    className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 border-0 text-white transition-all duration-300 hover:scale-105"
+                    className="flex-1 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 border-0 text-white transition-all duration-300 hover:scale-105"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Live Demo

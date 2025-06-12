@@ -19,7 +19,7 @@ const FloatingGeometry = () => {
               ? 'rounded-full bg-gradient-to-br from-cyan-400 to-blue-500' 
               : shape.type === 'triangle'
               ? 'bg-gradient-to-br from-emerald-400 to-cyan-500'
-              : 'bg-gradient-to-br from-violet-400 to-pink-500 rounded-lg rotate-45'
+              : 'bg-gradient-to-br from-blue-400 to-indigo-500 rounded-lg rotate-45'
           } animate-float-slow`}
           style={{
             width: `${shape.size}px`,

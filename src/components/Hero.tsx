@@ -17,9 +17,9 @@ const Hero = () => {
     <section 
       ref={heroRef}
       id="hero" 
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/10 via-transparent to-purple-900/10" />
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/10 via-transparent to-blue-900/10" />
       
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className={`transition-all duration-1000 ease-out ${
@@ -30,7 +30,7 @@ const Hero = () => {
           <div className={`mb-8 transition-all duration-1000 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}>
-            <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-4xl shadow-2xl">
+            <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-full flex items-center justify-center text-4xl shadow-2xl">
               👨‍💻
             </div>
           </div>
@@ -54,13 +54,13 @@ const Hero = () => {
             I build scalable web applications that solve real-world problems.
           </p>
           
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-8 transition-all duration-1000 delay-900 ${
+          <div className={`flex flex-col sm:flex-row gap-4 justify-center mb-12 transition-all duration-1000 delay-900 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}>
             <Button 
               size="lg" 
               onClick={scrollToAbout} 
-              className="text-lg px-8 py-6 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              className="text-lg px-8 py-6 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-white"
             >
               View My Work
             </Button>
@@ -68,7 +68,7 @@ const Hero = () => {
               variant="outline" 
               size="lg" 
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="text-lg px-8 py-6 border-slate-600 text-slate-300 hover:bg-slate-800 hover:border-slate-500 transition-all duration-300 hover:scale-105"
+              className="text-lg px-8 py-6 border-slate-600 text-slate-300 hover:bg-slate-800 hover:border-slate-500 hover:text-white bg-slate-800/30 backdrop-blur-sm transition-all duration-300 hover:scale-105"
             >
               Get In Touch
             </Button>
@@ -87,7 +87,7 @@ const Hero = () => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-full bg-slate-800/50 backdrop-blur-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-all duration-300 hover:scale-110 border border-slate-700/50"
+                className="p-3 rounded-full bg-slate-800/50 backdrop-blur-sm text-slate-300 hover:text-white hover:bg-slate-700/50 transition-all duration-300 hover:scale-110 border border-slate-700/50 relative z-20"
               >
                 <Icon className="w-5 h-5" />
               </a>
@@ -96,7 +96,7 @@ const Hero = () => {
         </div>
       </div>
       
-      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1300 ${
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1300 z-30 ${
         isVisible ? 'opacity-100 translate-y-0 animate-bounce' : 'opacity-0 translate-y-4'
       }`}>
         <ArrowDown className="w-6 h-6 text-slate-400" />

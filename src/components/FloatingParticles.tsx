@@ -20,8 +20,8 @@ const FloatingParticles = () => {
       'rgb(16, 185, 129)', // emerald
       'rgb(6, 182, 212)',  // cyan
       'rgb(59, 130, 246)', // blue
-      'rgb(139, 92, 246)', // violet
-      'rgb(236, 72, 153)', // pink
+      'rgb(34, 197, 94)',  // green
+      'rgb(20, 184, 166)', // teal
     ];
 
     const createParticles = () => {
@@ -47,13 +47,24 @@ const FloatingParticles = () => {
 
     const animateParticles = () => {
       setParticles(prevParticles =>
-        prevParticles.map(particle => ({
-          ...particle,
-          x: particle.x + particle.speedX,
-          y: particle.y + particle.speedY,
-          x: particle.x > window.innerWidth ? 0 : particle.x < 0 ? window.innerWidth : particle.x,
-          y: particle.y > window.innerHeight ? 0 : particle.y < 0 ? window.innerHeight : particle.y,
-        }))
+        prevParticles.map(particle => {
+          const newX = particle.x + particle.speedX;
+          const newY = particle.y + particle.speedY;
+
+          return {
+            ...particle,
+            x: newX > window.innerWidth
+              ? 0
+              : newX < 0
+              ? window.innerWidth
+              : newX,
+            y: newY > window.innerHeight
+              ? 0
+              : newY < 0
+              ? window.innerHeight
+              : newY,
+          };
+        })
       );
     };
 
