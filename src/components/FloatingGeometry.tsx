@@ -14,12 +14,12 @@ const FloatingGeometry = () => {
       {shapes.map((shape, index) => (
         <div
           key={index}
-          className={`absolute opacity-5 ${
+          className={`absolute opacity-5 dark:opacity-5 ${
             shape.type === 'circle' 
-              ? 'rounded-full bg-gradient-to-br from-cyan-400 to-blue-500' 
+              ? 'rounded-full bg-gradient-to-br from-blue-400 to-blue-600 dark:from-cyan-400 dark:to-blue-500' 
               : shape.type === 'triangle'
-              ? 'bg-gradient-to-br from-emerald-400 to-cyan-500'
-              : 'bg-gradient-to-br from-blue-400 to-indigo-500 rounded-lg rotate-45'
+              ? 'bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-emerald-400 dark:to-cyan-500'
+              : 'bg-gradient-to-br from-indigo-500 to-blue-600 dark:from-blue-400 dark:to-indigo-500 rounded-lg rotate-45'
           } animate-float-slow`}
           style={{
             width: `${shape.size}px`,

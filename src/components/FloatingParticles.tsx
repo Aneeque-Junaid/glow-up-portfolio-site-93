@@ -16,7 +16,15 @@ const FloatingParticles = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    const colors = [
+    const lightColors = [
+      'rgb(59, 130, 246)',   // blue-500
+      'rgb(16, 185, 129)',   // emerald-500
+      'rgb(6, 182, 212)',    // cyan-500
+      'rgb(99, 102, 241)',   // indigo-500
+      'rgb(139, 92, 246)',   // violet-500
+    ];
+
+    const darkColors = [
       'rgb(16, 185, 129)', // emerald
       'rgb(6, 182, 212)',  // cyan
       'rgb(59, 130, 246)', // blue
@@ -27,6 +35,8 @@ const FloatingParticles = () => {
     const createParticles = () => {
       const newParticles: Particle[] = [];
       const particleCount = window.innerWidth < 768 ? 20 : 40;
+      const isDark = document.documentElement.classList.contains('dark');
+      const colors = isDark ? darkColors : lightColors;
 
       for (let i = 0; i < particleCount; i++) {
         newParticles.push({
@@ -34,7 +44,7 @@ const FloatingParticles = () => {
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
           size: Math.random() * 4 + 2,
-          opacity: Math.random() * 0.3 + 0.1,
+          opacity: isDark ? Math.random() * 0.3 + 0.1 : Math.random() * 0.2 + 0.05,
           speedX: (Math.random() - 0.5) * 0.5,
           speedY: (Math.random() - 0.5) * 0.5,
           color: colors[Math.floor(Math.random() * colors.length)]
@@ -74,11 +84,16 @@ const FloatingParticles = () => {
       createParticles();
     };
 
+    // Listen for theme changes
+    const observer = new MutationObserver(createParticles);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
     window.addEventListener('resize', handleResize);
 
     return () => {
       clearInterval(interval);
       window.removeEventListener('resize', handleResize);
+      observer.disconnect();
     };
   }, []);
 
