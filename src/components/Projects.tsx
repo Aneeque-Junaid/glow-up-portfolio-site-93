@@ -17,7 +17,7 @@ const Projects = () => {
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
       github: "#",
       live: "#",
-      demoFrames: ["🏪", "🛍️", "💳", "📊"]
+      demoFrames: ["🏪", "🛍️", "💳", "📊"] // Simulate different screens
     },
     {
       title: "Task Management App",
@@ -61,7 +61,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card 
               key={index} 
-              className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-card/80 backdrop-blur-sm border-border hover:bg-card/90 hover:border-border/70 flex flex-col h-full ${
+              className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-card/30 backdrop-blur-sm border-border hover:bg-card/50 hover:border-border/70 flex flex-col h-full ${
                 isVisible 
                   ? 'opacity-100 translate-y-0 scale-100' 
                   : 'opacity-0 translate-y-8 scale-95'
@@ -71,7 +71,7 @@ const Projects = () => {
               }}
             >
               <CardHeader className="flex-shrink-0">
-                <div className="relative w-full h-48 bg-gradient-to-br from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 rounded-lg flex items-center justify-center mb-4 group-hover:from-primary/20 group-hover:to-secondary/20 dark:group-hover:from-primary/30 dark:group-hover:to-secondary/30 transition-all duration-300 border border-border/30 overflow-hidden">
+                <div className="relative w-full h-48 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center mb-4 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 border border-border/30 overflow-hidden">
                   <div className="text-6xl group-hover:scale-110 transition-transform duration-300 relative z-10">
                     {playingDemo === index ? (
                       <div className="animate-pulse">
@@ -82,9 +82,10 @@ const Projects = () => {
                     )}
                   </div>
                   
+                  {/* Interactive Demo Button */}
                   <button
                     onClick={() => toggleDemo(index)}
-                    className="absolute top-3 right-3 p-2 bg-background/90 backdrop-blur-sm rounded-full border border-border/50 hover:bg-background transition-all duration-300 opacity-0 group-hover:opacity-100"
+                    className="absolute top-3 right-3 p-2 bg-background/80 backdrop-blur-sm rounded-full border border-border/50 hover:bg-background transition-all duration-300 opacity-0 group-hover:opacity-100"
                     title={playingDemo === index ? "Stop demo" : "Play demo"}
                   >
                     {playingDemo === index ? (
@@ -94,7 +95,7 @@ const Projects = () => {
                     )}
                   </button>
                 </div>
-                <CardTitle className="group-hover:text-primary transition-colors text-card-foreground">
+                <CardTitle className="group-hover:text-primary transition-colors text-foreground">
                   {project.title}
                 </CardTitle>
               </CardHeader>
@@ -106,7 +107,7 @@ const Projects = () => {
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full border border-primary/20 hover:bg-primary/20 transition-colors duration-300"
+                      className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full border border-primary/30 hover:bg-primary/30 transition-colors duration-300"
                     >
                       {tech}
                     </span>
@@ -116,14 +117,14 @@ const Projects = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="flex-1 transition-all duration-300 hover:scale-105 border-border hover:bg-accent hover:text-accent-foreground"
+                    className="flex-1 transition-all duration-300 hover:scale-105"
                   >
                     <Github className="w-4 h-4 mr-2" />
                     GitHub
                   </Button>
                   <Button 
                     size="sm" 
-                    className="flex-1 transition-all duration-300 hover:scale-105 bg-primary hover:bg-primary/90 text-primary-foreground"
+                    className="flex-1 transition-all duration-300 hover:scale-105"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Live Demo
