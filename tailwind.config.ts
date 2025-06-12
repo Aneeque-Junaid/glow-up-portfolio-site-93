@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -100,7 +101,7 @@ export default {
 						transform: 'translateX(0)'
 					},
 					'100%': {
-						transform: 'translateX(calc(-50% - 1rem))'
+						transform: 'translateX(calc(-33.333% - 0.75rem))'
 					}
 				},
 				'float-slow': {
@@ -127,7 +128,7 @@ export default {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.8s ease-out',
-				'infinite-scroll': 'infinite-scroll 30s linear infinite',
+				'infinite-scroll': 'infinite-scroll 40s linear infinite',
 				'float-slow': 'float-slow 20s ease-in-out infinite',
 				'float-medium': 'float-medium 15s ease-in-out infinite'
 			}

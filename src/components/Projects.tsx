@@ -1,11 +1,13 @@
 
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Play, Pause } from "lucide-react";
 
 const Projects = () => {
   const { ref: sectionRef, isVisible } = useScrollAnimation();
+  const [playingDemo, setPlayingDemo] = useState<number | null>(null);
 
   const projects = [
     {
@@ -14,7 +16,8 @@ const Projects = () => {
       image: "🛒",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
       github: "#",
-      live: "#"
+      live: "#",
+      demoFrames: ["🏪", "🛍️", "💳", "📊"] // Simulate different screens
     },
     {
       title: "Task Management App",
@@ -22,7 +25,8 @@ const Projects = () => {
       image: "📋",
       technologies: ["Vue.js", "Express.js", "Socket.io", "PostgreSQL"],
       github: "#",
-      live: "#"
+      live: "#",
+      demoFrames: ["📋", "✅", "👥", "🔄"]
     },
     {
       title: "Weather Dashboard",
@@ -30,20 +34,25 @@ const Projects = () => {
       image: "🌤️",
       technologies: ["TypeScript", "Next.js", "Tailwind CSS", "API Integration"],
       github: "#",
-      live: "#"
+      live: "#",
+      demoFrames: ["🌤️", "🌧️", "📍", "📈"]
     }
   ];
 
+  const toggleDemo = (index: number) => {
+    setPlayingDemo(playingDemo === index ? null : index);
+  };
+
   return (
-    <section ref={sectionRef} id="projects" className="py-20 bg-slate-900/30 backdrop-blur-sm">
+    <section ref={sectionRef} id="projects" className="py-20 bg-muted/30 backdrop-blur-sm">
       <div className="container mx-auto px-4">
         <div className={`text-center mb-16 transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             A selection of projects that showcase my skills and passion for development
           </p>
         </div>
@@ -52,7 +61,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <Card 
               key={index} 
-              className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-slate-800/30 backdrop-blur-sm border-slate-700/50 hover:bg-slate-800/50 hover:border-slate-600/50 flex flex-col h-full ${
+              className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-card/30 backdrop-blur-sm border-border hover:bg-card/50 hover:border-border/70 flex flex-col h-full ${
                 isVisible 
                   ? 'opacity-100 translate-y-0 scale-100' 
                   : 'opacity-0 translate-y-8 scale-95'
@@ -62,24 +71,43 @@ const Projects = () => {
               }}
             >
               <CardHeader className="flex-shrink-0">
-                <div className="w-full h-48 bg-gradient-to-br from-indigo-500/20 to-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:from-indigo-500/30 group-hover:to-blue-500/30 transition-all duration-300 border border-slate-700/30">
-                  <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
-                    {project.image}
+                <div className="relative w-full h-48 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center mb-4 group-hover:from-primary/30 group-hover:to-secondary/30 transition-all duration-300 border border-border/30 overflow-hidden">
+                  <div className="text-6xl group-hover:scale-110 transition-transform duration-300 relative z-10">
+                    {playingDemo === index ? (
+                      <div className="animate-pulse">
+                        {project.demoFrames[Math.floor(Date.now() / 1000) % project.demoFrames.length]}
+                      </div>
+                    ) : (
+                      project.image
+                    )}
                   </div>
+                  
+                  {/* Interactive Demo Button */}
+                  <button
+                    onClick={() => toggleDemo(index)}
+                    className="absolute top-3 right-3 p-2 bg-background/80 backdrop-blur-sm rounded-full border border-border/50 hover:bg-background transition-all duration-300 opacity-0 group-hover:opacity-100"
+                    title={playingDemo === index ? "Stop demo" : "Play demo"}
+                  >
+                    {playingDemo === index ? (
+                      <Pause className="w-4 h-4 text-foreground" />
+                    ) : (
+                      <Play className="w-4 h-4 text-foreground" />
+                    )}
+                  </button>
                 </div>
-                <CardTitle className="group-hover:text-indigo-400 transition-colors text-slate-200">
+                <CardTitle className="group-hover:text-primary transition-colors text-foreground">
                   {project.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col flex-1">
-                <p className="text-slate-400 mb-4 leading-relaxed flex-1">
+                <p className="text-muted-foreground mb-4 leading-relaxed flex-1">
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.technologies.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-xs rounded-full border border-indigo-500/30 hover:bg-indigo-500/30 transition-colors duration-300"
+                      className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full border border-primary/30 hover:bg-primary/30 transition-colors duration-300"
                     >
                       {tech}
                     </span>
@@ -89,14 +117,14 @@ const Projects = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="flex-1 border-slate-600 text-slate-300 hover:bg-slate-700/50 hover:border-slate-500 hover:text-white bg-slate-800/30 backdrop-blur-sm transition-all duration-300 hover:scale-105"
+                    className="flex-1 transition-all duration-300 hover:scale-105"
                   >
                     <Github className="w-4 h-4 mr-2" />
                     GitHub
                   </Button>
                   <Button 
                     size="sm" 
-                    className="flex-1 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 border-0 text-white transition-all duration-300 hover:scale-105"
+                    className="flex-1 transition-all duration-300 hover:scale-105"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
                     Live Demo

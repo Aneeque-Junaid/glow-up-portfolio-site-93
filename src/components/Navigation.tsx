@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState("hero");
@@ -50,10 +50,10 @@ const Navigation = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+            <div className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
               Portfolio
             </div>
             
@@ -63,61 +63,67 @@ const Navigation = () => {
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className={`text-sm transition-all duration-300 hover:text-indigo-400 relative ${
+                  className={`text-sm transition-all duration-300 hover:text-primary relative ${
                     activeSection === item.href.substring(1)
-                      ? "text-indigo-400 font-medium"
-                      : "text-slate-300"
+                      ? "text-primary font-medium"
+                      : "text-muted-foreground"
                   }`}
                 >
                   {item.name}
                   {activeSection === item.href.substring(1) && (
-                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-indigo-400 rounded-full"></div>
+                    <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"></div>
                   )}
                 </button>
               ))}
             </div>
             
-            {/* Desktop CTA Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => scrollToSection("#contact")}
-              className="hidden md:inline-flex border-indigo-500/30 text-indigo-400 hover:bg-indigo-500/10 hover:border-indigo-400"
-            >
-              Get In Touch
-            </Button>
+            {/* Desktop Actions */}
+            <div className="hidden md:flex items-center gap-2">
+              <ThemeToggle />
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => scrollToSection("#contact")}
+                className="transition-all duration-300 hover:scale-105"
+              >
+                Get In Touch
+              </Button>
+            </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={toggleMobileMenu}
-              className="md:hidden p-2 rounded-lg hover:bg-slate-800/50 transition-colors duration-300"
-            >
-              <div className="relative w-6 h-6">
-                <Menu 
-                  className={`w-6 h-6 absolute inset-0 transition-all duration-300 text-slate-300 ${
-                    isMobileMenuOpen ? 'rotate-90 opacity-0' : 'rotate-0 opacity-100'
-                  }`} 
-                />
-                <X 
-                  className={`w-6 h-6 absolute inset-0 transition-all duration-300 text-slate-300 ${
-                    isMobileMenuOpen ? 'rotate-0 opacity-100' : '-rotate-90 opacity-0'
-                  }`} 
-                />
-              </div>
-            </button>
+            {/* Mobile Actions */}
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={toggleMobileMenu}
+                className="p-2 rounded-lg hover:bg-accent transition-colors duration-300"
+              >
+                <div className="relative w-6 h-6">
+                  <Menu 
+                    className={`w-6 h-6 absolute inset-0 transition-all duration-300 text-foreground ${
+                      isMobileMenuOpen ? 'rotate-90 opacity-0' : 'rotate-0 opacity-100'
+                    }`} 
+                  />
+                  <X 
+                    className={`w-6 h-6 absolute inset-0 transition-all duration-300 text-foreground ${
+                      isMobileMenuOpen ? 'rotate-0 opacity-100' : '-rotate-90 scale-0'
+                    }`} 
+                  />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-md transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 bg-background/95 backdrop-blur-md transition-all duration-300 md:hidden ${
           isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
         }`}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <div
-          className={`absolute top-20 left-4 right-4 bg-slate-800/90 backdrop-blur-md rounded-lg border border-slate-700/50 p-6 transition-all duration-300 ${
+          className={`absolute top-20 left-4 right-4 bg-card/90 backdrop-blur-md rounded-lg border border-border p-6 transition-all duration-300 ${
             isMobileMenuOpen ? 'translate-y-0 scale-100' : '-translate-y-4 scale-95'
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -127,10 +133,10 @@ const Navigation = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left py-3 px-4 rounded-lg transition-all duration-300 hover:bg-indigo-500/10 ${
+                className={`block w-full text-left py-3 px-4 rounded-lg transition-all duration-300 hover:bg-accent ${
                   activeSection === item.href.substring(1)
-                    ? "text-indigo-400 bg-indigo-500/5 font-medium"
-                    : "text-slate-300"
+                    ? "text-primary bg-accent/50 font-medium"
+                    : "text-muted-foreground"
                 }`}
                 style={{
                   animationDelay: `${index * 50}ms`,
@@ -140,10 +146,10 @@ const Navigation = () => {
                 {item.name}
               </button>
             ))}
-            <div className="pt-4 border-t border-slate-700/50">
+            <div className="pt-4 border-t border-border">
               <Button
                 onClick={() => scrollToSection("#contact")}
-                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+                className="w-full transition-all duration-300 hover:scale-105"
                 variant="outline"
               >
                 Get In Touch
